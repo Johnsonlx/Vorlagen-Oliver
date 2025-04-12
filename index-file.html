@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine HTML-Komponentenbibliothek</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Font Awesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS für Scroll-Animationen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        /* Zusätzliche Stile für die Bibliotheks-Übersicht */
+        .component-library {
+            padding: 2rem 0;
+        }
+
+        .component-category {
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .category-header {
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header:hover {
+            background-color: #3a506b;
+        }
+
+        .category-header i {
+            transition: transform 0.3s ease;
+        }
+
+        .category-header.active i {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .category-content.show {
+            max-height: 5000px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .component-item {
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .component-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .component-preview {
+            height: 200px;
+            border-bottom: 1px solid var(--medium-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .component-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .component-info {
+            padding: 1rem;
+        }
+
+        .component-name {
+            font-size: 1.1rem;
+            font

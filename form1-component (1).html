@@ -1,0 +1,234 @@
+<!-- components/forms/form1.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modernes Kontaktformular</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-checkbox {
+            margin-right: 10px;
+            min-width: 18px;
+            min-height: 18px;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background-color: #2980b9;
+        }
+        
+        .form-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: #e74c3c;
+        }
+        
+        .form-input.error + .form-error,
+        .form-textarea.error + .form-error,
+        .form-select.error + .form-error {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Kontaktiere uns</h2>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-input" placeholder="Dein Name" required>
+                <div class="form-error">Bitte gib deinen Namen ein</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">E-Mail</label>
+                <input type="email" id="email" class="form-input" placeholder="deine@email.de" required>
+                <div class="form-error">Bitte gib eine gültige E-Mail-Adresse ein</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject" class="form-label">Betreff</label>
+                <select id="subject" class="form-select">
+                    <option value="" disabled selected>Bitte wählen</option>
+                    <option value="allgemein">Allgemeine Anfrage</option>
+                    <option value="support">Technischer Support</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="other">Sonstiges</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message" class="form-label">Nachricht</label>
+                <textarea id="message" class="form-textarea" placeholder="Deine Nachricht..." required></textarea>
+                <div class="form-error">Bitte gib eine Nachricht ein</div>
+            </div>
+            
+            <div class="form-checkbox-group">
+                <input type="checkbox" id="terms" class="form-checkbox" required>
+                <label for="terms">Ich akzeptiere die Datenschutzbestimmungen</label>
+            </div>
+            
+            <button type="submit" class="form-submit">Nachricht senden</button>
+        </form>
+    </div>
+    
+    <script>
+        const contactForm = document.getElementById('contact-form');
+        const formInputs = document.querySelectorAll('.form-input, .form-textarea');
+        
+        // Form validation
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            formInputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+                
+                if (input.type === 'email' && input.value) {
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(input.value)) {
+                        input.classList.add('error');
+                        isValid = false;
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // Hier würde normalerweise die Form-Submission erfolgen
+                alert('Formular erfolgreich gesendet!');
+                contactForm.reset();
+            }
+        });
+        
+        // Live validation beim Tippen
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    if (input.value.trim()) {
+                        if (input.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                            input.classList.remove('error');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

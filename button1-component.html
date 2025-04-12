@@ -1,0 +1,46 @@
+<!-- components/buttons/button1.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .button-3d {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 6px 0 #2980b9;
+            transition: all 0.1s ease;
+        }
+        
+        .button-3d:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #2980b9;
+        }
+        
+        .button-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <button class="button-3d">3D Button</button>
+</body>
+</html>
