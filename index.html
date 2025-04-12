@@ -1,14 +1,155 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meine Komponentengalerie</title>
-  <link rel="stylesheet" href="styles/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML-Vorlagen Datenbank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .template-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .preview {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .preview iframe {
+            width: 100%;
+            height: 300px;
+            transform: scale(0.8);
+            transform-origin: 0 0;
+            border: none;
+        }
+        .preview::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, white);
+        }
+        .info {
+            padding: 15px;
+        }
+        .info h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons a {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .buttons a:nth-child(2) {
+            background-color: #2196F3;
+        }
+        .search {
+            margin-bottom: 20px;
+        }
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Meine HTML-Komponentengalerie</h1>
-  <div id="components-container"></div>
-  <script src="scripts/loader.js"></script>
+    <h1>HTML-Vorlagen Datenbank</h1>
+    
+    <div class="search">
+        <input type="text" id="search-input" placeholder="Vorlagen durchsuchen...">
+    </div>
+    
+    <div class="gallery" id="templates-container">
+        <!-- Die Vorlagen werden dynamisch eingefügt -->
+    </div>
+
+    <script>
+        // Konfiguration - Füge hier deine Vorlagen hinzu
+        const templates = [
+            {
+                name: "Einfache Webseite",
+                description: "Eine grundlegende HTML-Vorlage für einfache Webseiten",
+                file: "simple-website.html"
+            },
+            {
+                name: "Kontaktformular",
+                description: "Eine Vorlage für ein Kontaktformular",
+                file: "contact-form.html"
+            },
+            // Füge hier weitere Vorlagen hinzu
+        ];
+
+        // Templates in die Galerie einfügen
+        const container = document.getElementById('templates-container');
+        
+        function renderTemplates(templatesArray) {
+            container.innerHTML = '';
+            
+            templatesArray.forEach(template => {
+                const card = document.createElement('div');
+                card.className = 'template-card';
+                
+                card.innerHTML = `
+                    <div class="preview">
+                        <iframe src="${template.file}" title="${template.name}"></iframe>
+                    </div>
+                    <div class="info">
+                        <h3>${template.name}</h3>
+                        <p>${template.description}</p>
+                        <div class="buttons">
+                            <a href="${template.file}" target="_blank">Vorschau</a>
+                            <a href="${template.file}" download>Herunterladen</a>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // Suchfunktion
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredTemplates = templates.filter(template => 
+                template.name.toLowerCase().includes(searchTerm) || 
+                template.description.toLowerCase().includes(searchTerm)
+            );
+            renderTemplates(filteredTemplates);
+        });
+        
+        // Initial rendering
+        renderTemplates(templates);
+    </script>
 </body>
 </html>
